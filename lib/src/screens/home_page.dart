@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fyf/src/providers/recetas_provider.dart';
 import 'package:fyf/src/screens/comida_page.dart';
 import 'package:fyf/src/screens/recetas_pages.dart';
+import 'package:image_picker/image_picker.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key}) : super(key: key);
@@ -11,8 +12,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
-
 
   int _currentIndex = 0;
   

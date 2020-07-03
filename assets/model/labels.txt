@@ -1,0 +1,8 @@
+0 Ají de Gallina
+1 Arroz con Pato
+2 Cabrito
+3 Cebiche
+4 Chaufa
+5 Papa a la Huancaína
+6 Pollo a la Brasa
+7 Tallarines Rojos
