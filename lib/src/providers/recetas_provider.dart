@@ -12,19 +12,22 @@ class RecetasProvider {
   String _appId     = 'ad1ef42c';
   String _url       = 'api.edamam.com';
 
-  Future<List<Receta>> getRecetas() async {
+  Future<List<Receta>> getRecetas(String comida) async {
+    /*
     final url = Uri.https(_url, 'search', {
       'q'       : 'chicken',
       'app_id'  : _appId,
       'app_key' : _apikey
-    });
+    });*/
+
+    final url = "https://${_url}/search?q=chicken&app_id=${_appId}&app_key=${_apikey}";
 
     final resp = await http.get(url);
     final decodedData = json.decode(resp.body);
+    final recetas = new Recetas.fromJsonList(decodedData['hits']);
+    print (recetas.items);
 
-    print (decodedData['results']);
-
-    return [];
+    return recetas.items;
 
 
   }

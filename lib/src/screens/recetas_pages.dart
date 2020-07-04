@@ -1,8 +1,15 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
+import 'package:fyf/src/providers/recetas_provider.dart';
 
 class RecetasPage extends StatelessWidget {
-  const RecetasPage({Key key}) : super(key: key);
+  
+  //String busqueda;
+  //RecetasPage({@required this.busqueda});
+
+  final recetasProvider = new RecetasProvider(); 
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -22,21 +29,16 @@ class RecetasPage extends StatelessWidget {
          ),
        ),
       body: FadeInUp(
-        child: ListView(
+        child: ListView.builder(
           padding: EdgeInsets.all(30),
-          children: <Widget>[
-            Text('Ceviche'),
-            Text('Pollito a la brasa'),
-            Text('Tallarines rojos'),
-            Text('Papa a la huancaina'),
-            Text('Tacu tacu'),
-            Text('Lomo saltado'),
-            Text('Arroz con huevito'),
-            Text('Asado'),
-            Text('Cabrito'),
-          ],
+          itemCount: 10,
+          itemBuilder: (BuildContext context, int index){
+            return Container();
+          },
         ),
       ),
     );
   }
+
+
 }

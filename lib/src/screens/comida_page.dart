@@ -4,12 +4,13 @@ import 'dart:ui';
 
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
+import 'package:fyf/src/providers/recetas_provider.dart';
+import 'package:fyf/src/screens/recetas_pages.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tflite/tflite.dart';
 
 
 class ComidaPage extends StatefulWidget {
-  ComidaPage({Key key}) : super(key: key);
 
   @override
   _ComidaPageState createState() => _ComidaPageState();
@@ -28,7 +29,8 @@ class _ComidaPageState extends State<ComidaPage> {
   String _resultado;
   String _ruta;
   //bool _modeloCargado = false;
-
+  final recetasProvider = new RecetasProvider(); 
+  
 /*
   @override
   void initState() {    
@@ -71,7 +73,10 @@ class _ComidaPageState extends State<ComidaPage> {
     var salida = await Tflite.runModelOnImage(path: _ruta);
 
     setState(() {
-      _resultado = salida.toString();     
+      _resultado = salida[0]['label'].toString().substring(2); 
+      
+      final recetas = recetasProvider.getRecetas(_resultado);
+      //MaterialPageRoute(builder: (BuildContext context) => RecetasPage(busqueda: _resultado ));
     });
   }
 
@@ -167,12 +172,10 @@ class _ComidaPageState extends State<ComidaPage> {
                ],
              ),
             SizedBox(height: 15,),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                _resultado == null
+            Container(
+              child: _resultado == null
                 ? Text(
-                  ' ', 
+                  "Couldn't find", 
                   style: TextStyle(
                     fontSize: 20,    
                     foreground: Paint()..shader = linearGradient,
@@ -185,7 +188,6 @@ class _ComidaPageState extends State<ComidaPage> {
                     foreground: Paint()..shader = linearGradient,
                   ),     
                 )
-              ],
             )
             
            ],
@@ -195,7 +197,9 @@ class _ComidaPageState extends State<ComidaPage> {
   }
 
 
-
+  String getResult(){
+    return _resultado;
+  }
 
 
 

@@ -5,7 +5,6 @@ import 'package:fyf/src/screens/recetas_pages.dart';
 import 'package:image_picker/image_picker.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({Key key}) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -14,13 +13,14 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
 
   int _currentIndex = 0;
+
   
   final tabs = [
     Container(
       child: ComidaPage(),
     ),
     Container(
-      child: RecetasPage()
+      child: RecetasPage(),
     ),
   ];
 
