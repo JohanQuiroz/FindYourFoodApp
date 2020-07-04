@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fyf/src/screens/home_page.dart';
+import 'package:fyf/src/screens/start_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -14,7 +15,8 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       initialRoute: '/',
       routes: {
-        '/' : ( BuildContext context ) => HomePage(),
+        '/' : ( BuildContext context ) => StartPage(),
+        '/home' : ( BuildContext context ) => HomePage(),
       },     
     );
   }
