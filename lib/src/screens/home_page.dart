@@ -36,25 +36,50 @@ class _HomePageState extends State<HomePage> {
 
   
   Widget _bottomMenu (){
+    
 
     return BottomNavigationBar(
       currentIndex: _currentIndex,
-      backgroundColor: Colors.blue,
-      selectedItemColor: Colors.white,
-      unselectedItemColor: Colors.white38,
-      iconSize: 30,
-      selectedFontSize: 20.0,
-      unselectedFontSize: 15.0,
+      unselectedLabelStyle: TextStyle(
+        color: Colors.grey
+      ),      
       items: [
         BottomNavigationBarItem(
-          title: Text('Food',),
-          icon: Icon(Icons.fastfood),
-          backgroundColor: Colors.blue,
+          activeIcon: ShaderMask(
+            shaderCallback: (Rect bounds) {
+              return RadialGradient(
+                center: Alignment.center,
+                radius: 1.0,
+                colors: <Color>[
+                  Colors.green,
+                  Colors.blue
+                ],
+                tileMode: TileMode.mirror,
+              ).createShader(bounds);
+            },
+            child: Icon(Icons.fastfood),
+          ),
+          icon: Icon(Icons.fastfood, color: Colors.grey),
+          title: Text('')            
+          
         ),
         BottomNavigationBarItem(
-          title: Text('Recipes'),
-          icon: Icon(Icons.library_books),
-          backgroundColor: Colors.green,
+          activeIcon: ShaderMask(
+            shaderCallback: (Rect bounds) {
+              return RadialGradient(
+                center: Alignment.center,
+                radius: 1.0,
+                colors: <Color>[
+                  Colors.green,
+                  Colors.blue
+                ],
+                tileMode: TileMode.mirror,
+              ).createShader(bounds);
+            },
+            child: Icon(Icons.library_books),
+          ),
+          icon: Icon(Icons.library_books, color: Colors.grey),
+          title: Text(' ')                
         ),
       ], 
       onTap: (index){

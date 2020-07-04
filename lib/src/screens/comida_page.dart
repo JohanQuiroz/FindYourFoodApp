@@ -2,6 +2,7 @@
 import 'dart:io';
 import 'dart:ui';
 
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tflite/tflite.dart';
@@ -15,7 +16,14 @@ class ComidaPage extends StatefulWidget {
 }
 
 class _ComidaPageState extends State<ComidaPage> {
-  
+
+  Shader linearGradient = LinearGradient(
+          colors: [
+            Colors.blue,
+            Colors.green
+          ]          
+        ).createShader(Rect.fromLTWH(0.0, 0.0, 200.0, 70.0));
+    
   File _imagen;
   String _resultado;
   String _ruta;
@@ -71,73 +79,115 @@ class _ComidaPageState extends State<ComidaPage> {
   Widget build(BuildContext context) {
     return Scaffold(
        appBar: AppBar(
-         title: Text('Comida'),
+         title: FadeInLeft(child: Text('FIND YOUR FOOD')),    
+         centerTitle: true,  
+         flexibleSpace: Container(
+           decoration: BoxDecoration(
+             gradient: LinearGradient(
+              colors: [
+                Colors.blue,
+                Colors.green
+              ]
+            )
+           ),
+         ),
        ),
        body: Container(
          padding: EdgeInsets.symmetric(horizontal: 20.0),
          child: Column(
            crossAxisAlignment: CrossAxisAlignment.start,
            children: <Widget>[
+             SizedBox(height: 15,),
              _imagen == null
               ? Image.asset('assets/images/noImage.jpg')
               : Image.file(_imagen, fit: BoxFit.cover),
-             Row(
+             SizedBox(height: 15,),
+             Row(               
                mainAxisAlignment: MainAxisAlignment.center,
-               children: <Widget>[
-                Container(
-                  margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                  child: RaisedButton(
-                    onPressed: () => obtenerImagen('Camara'),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[
-                        Text('Camera'),
-                        Icon(Icons.camera_alt)
-                      ],
-                    ),
-                    textColor: Colors.white,
-                    color: Colors.blue,
-                    padding: EdgeInsets.fromLTRB(12, 12, 12, 12),
-                  )
+               children: <Widget>[                
+                FadeInLeft(
+                  child: Container(                                               
+                    child: RaisedButton(                                       
+                      onPressed: () => obtenerImagen('Camara'),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: <Widget>[ 
+                          Icon(Icons.camera_alt)
+                        ],
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20)
+                      ),
+                      textColor: Colors.white,
+                      color: Colors.green[300],
+                      padding: EdgeInsets.fromLTRB(12, 12, 12, 12),
+                    )
+                  ),
                 ),
-                Container(
-                  margin: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                  child: RaisedButton(
-                    onPressed: () => obtenerImagen('Galeria'),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[
-                        Text('Gallery'),
-                        Icon(Icons.photo_library)
-                      ],
-                    ),
-                    textColor: Colors.white,
-                    color: Colors.blue,
-                    padding: EdgeInsets.fromLTRB(12, 12, 12, 12),
-                  )
+                FadeInUp(
+                  child: Container(
+                    margin: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                    child: RaisedButton(
+                      onPressed: () => obtenerImagen('Galeria'),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: <Widget>[                        
+                          Icon(Icons.photo_library)
+                        ],
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20)
+                      ),
+                      textColor: Colors.white,
+                      color: Colors.green[300],
+                      padding: EdgeInsets.fromLTRB(12, 12, 12, 12),
+                    )
+                  ),
                 ),
-                Container(
-                  margin: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                  child: RaisedButton(
-                    onPressed: () => clasificarImagen(),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[
-                        Text('Search'),
-                        Icon(Icons.search)
-                      ],
-                    ),
-                    textColor: Colors.white,
-                    color: Colors.blue,
-                    padding: EdgeInsets.fromLTRB(12, 12, 12, 12),
-                  )
+                FadeInRight(
+                  child: Container(
+                    margin: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                    child: RaisedButton(
+                      onPressed: () => clasificarImagen(),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: <Widget>[                        
+                          Icon(Icons.search)
+                        ],
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20)
+                      ),
+                      textColor: Colors.white,
+                      color: Colors.green[300],
+                      padding: EdgeInsets.fromLTRB(12, 12, 12, 12),
+                    )
+                  ),
                 ),
                ],
              ),
             SizedBox(height: 15,),
-            _resultado == null
-              ? Text('Food description', style: TextStyle(fontSize: 20),)
-              : Text(_resultado)
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                _resultado == null
+                ? Text(
+                  ' ', 
+                  style: TextStyle(
+                    fontSize: 20,    
+                    foreground: Paint()..shader = linearGradient,
+                  ),                  
+                )
+                : Text(
+                  _resultado,
+                  style: TextStyle(
+                    fontSize: 20,    
+                    foreground: Paint()..shader = linearGradient,
+                  ),     
+                )
+              ],
+            )
+            
            ],
          ),
        ),
