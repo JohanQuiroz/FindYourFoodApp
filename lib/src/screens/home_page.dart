@@ -20,11 +20,6 @@ class _HomePageState extends State<HomePage> {
       child: ComidaPage(),
     ),
     Container(
-      child: Center(
-        child: Text('Camara'),
-      ),
-    ),
-    Container(
       child: RecetasPage()
     ),
   ];
@@ -57,11 +52,6 @@ class _HomePageState extends State<HomePage> {
           backgroundColor: Colors.blue,
         ),
         BottomNavigationBarItem(
-          title: Text('Camera'),
-          icon: Icon(Icons.camera_alt),
-          backgroundColor: Colors.orangeAccent,
-        ),
-        BottomNavigationBarItem(
           title: Text('Recipes'),
           icon: Icon(Icons.library_books),
           backgroundColor: Colors.green,
@@ -74,15 +64,6 @@ class _HomePageState extends State<HomePage> {
       },
     );
   }
-
-/*
-  void _openCamera() async {
-    _picture = await ImagePicker.pickImage(source: ImageSource.camera);
-
-  }
-
-  */
-
 
 }
 

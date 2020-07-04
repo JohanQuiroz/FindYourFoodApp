@@ -1,5 +1,6 @@
 
 import 'dart:io';
+import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -78,69 +79,75 @@ class _ComidaPageState extends State<ComidaPage> {
            crossAxisAlignment: CrossAxisAlignment.start,
            children: <Widget>[
              _imagen == null
-              ? Text('No image selected.')
-              : Image.file(_imagen, width: 300, height: 200, fit: BoxFit.cover),
-             Container(
-              margin: EdgeInsets.fromLTRB(0, 30, 0, 20),
-              child: RaisedButton(
-                onPressed: () => obtenerImagen('Camara'),
-                child: Text('Abrir Cámara'),
-                textColor: Colors.white,
-                color: Colors.blue,
-                padding: EdgeInsets.fromLTRB(12, 12, 12, 12),
-              )),
-              Container(
-                margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                child: RaisedButton(
-                  onPressed: () => obtenerImagen('Galeria'),
-                  child: Text('Abrir Galeria'),
-                  textColor: Colors.white,
-                  color: Colors.blue,
-                  padding: EdgeInsets.fromLTRB(12, 12, 12, 12),
-                )),
-              Container(
-                margin: EdgeInsets.fromLTRB(0, 30, 0, 20),
-                child: RaisedButton(
-                  onPressed: () => clasificarImagen(),
-                  child: Text('Clasificar'),
-                  textColor: Colors.white,
-                  color: Colors.blue,
-                  padding: EdgeInsets.fromLTRB(12, 12, 12, 12),
-                )),
-              _resultado == null
-                ? Text('Resulta')
-                : Text(_resultado)
+              ? Image.asset('assets/images/noImage.jpg')
+              : Image.file(_imagen, fit: BoxFit.cover),
+             Row(
+               mainAxisAlignment: MainAxisAlignment.center,
+               children: <Widget>[
+                Container(
+                  margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                  child: RaisedButton(
+                    onPressed: () => obtenerImagen('Camara'),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        Text('Camera'),
+                        Icon(Icons.camera_alt)
+                      ],
+                    ),
+                    textColor: Colors.white,
+                    color: Colors.blue,
+                    padding: EdgeInsets.fromLTRB(12, 12, 12, 12),
+                  )
+                ),
+                Container(
+                  margin: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                  child: RaisedButton(
+                    onPressed: () => obtenerImagen('Galeria'),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        Text('Gallery'),
+                        Icon(Icons.photo_library)
+                      ],
+                    ),
+                    textColor: Colors.white,
+                    color: Colors.blue,
+                    padding: EdgeInsets.fromLTRB(12, 12, 12, 12),
+                  )
+                ),
+                Container(
+                  margin: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                  child: RaisedButton(
+                    onPressed: () => clasificarImagen(),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        Text('Search'),
+                        Icon(Icons.search)
+                      ],
+                    ),
+                    textColor: Colors.white,
+                    color: Colors.blue,
+                    padding: EdgeInsets.fromLTRB(12, 12, 12, 12),
+                  )
+                ),
+               ],
+             ),
+            SizedBox(height: 15,),
+            _resultado == null
+              ? Text('Food description', style: TextStyle(fontSize: 20),)
+              : Text(_resultado)
            ],
          ),
        ),
     );
   }
-  /*
 
-  Widget _imagenCapturada() {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(20.0),
-      child: Image(        
-        image: AssetImage('assets/images/noImage.jpg'),
 
-      ),
-    );
-  }
 
-  Widget _descripcion() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Text(
-          'Descripcion',
-          style: TextStyle(fontSize: 30),
-        ),
-        Text(
-          'informacion del platillo',
-          style: TextStyle(fontSize: 20),
-          textAlign: TextAlign.justify,
-        )
-      ],
-    );
-  }*/
+
+
+
+
 }
