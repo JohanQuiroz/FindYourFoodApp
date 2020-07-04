@@ -174,21 +174,22 @@ class _ComidaPageState extends State<ComidaPage> {
             SizedBox(height: 15,),
             Container(
               child: _resultado == null
-                ? Text(
-                  "Couldn't find", 
-                  style: TextStyle(
-                    fontSize: 20,    
-                    foreground: Paint()..shader = linearGradient,
-                  ),                  
-                )
+                ? Text("")
                 : Text(
                   _resultado,
                   style: TextStyle(
-                    fontSize: 20,    
+                    fontSize: 35,     
                     foreground: Paint()..shader = linearGradient,
                   ),     
                 )
-            )
+            ),
+            SizedBox(height: 15,),
+            Text("Description", 
+              style: TextStyle(
+                fontSize: 25,       
+                color: Colors.black54,
+              ),  
+            ),
             
            ],
          ),

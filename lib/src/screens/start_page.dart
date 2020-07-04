@@ -6,7 +6,7 @@ class StartPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.green[200],
+      backgroundColor: Colors.green[400],
       body: ZoomIn(
         child: ZoomIn( 
           from: 20,        
