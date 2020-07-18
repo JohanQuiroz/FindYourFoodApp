@@ -4,9 +4,14 @@ import 'dart:ui';
 
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fyf/src/blocs/recetaBloc/bloc.dart';
 import 'package:fyf/src/providers/recetas_provider.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tflite/tflite.dart';
+
+import '../providers/recetas_provider.dart';
+import 'receta_page.dart';
 
 
 class ComidaPage extends StatefulWidget {
@@ -16,19 +21,16 @@ class ComidaPage extends StatefulWidget {
 }
 
 class _ComidaPageState extends State<ComidaPage> {
-
   Shader linearGradient = LinearGradient(
-          colors: [
-            Colors.blue,
-            Colors.green
-          ]          
-        ).createShader(Rect.fromLTWH(0.0, 0.0, 200.0, 70.0));
+    colors: [
+      Colors.blue,
+      Colors.green
+    ]          
+  ).createShader(Rect.fromLTWH(0.0, 0.0, 200.0, 70.0));
     
   File _imagen;
   String _resultado;
-  String _ruta;
-  //bool _modeloCargado = false;
-  final recetasProvider = new RecetasProvider(); 
+  String _ruta;    
   
 /*
   @override
@@ -83,7 +85,7 @@ class _ComidaPageState extends State<ComidaPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       appBar: AppBar(
+      appBar: AppBar(
          title: FadeInLeft(child: Text('FIND YOUR FOOD')),    
          centerTitle: true,  
          flexibleSpace: Container(
@@ -96,8 +98,106 @@ class _ComidaPageState extends State<ComidaPage> {
             )
            ),
          ),
-       ),
-       body: Container(
+      ),
+      body: ListView(
+        children: <Widget>[           
+          Container(             
+            padding: EdgeInsets.symmetric(horizontal: 40, vertical: 20),
+            child :
+            _imagen == null
+              ? Image.asset('assets/images/noImage.jpg')
+              : Image.file(_imagen, fit: BoxFit.cover),
+          ),
+          Row(               
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[                
+              FadeInLeft(
+                child: Container(                                               
+                  child: RaisedButton(                                       
+                    onPressed: () => obtenerImagen('Camara'),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[ 
+                        Icon(Icons.camera_alt)
+                      ],
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20)
+                    ),
+                    textColor: Colors.white,
+                    color: Colors.green[300],
+                    padding: EdgeInsets.fromLTRB(12, 12, 12, 12),
+                  )
+                ),
+              ),
+              FadeInUp(
+                child: Container(
+                  margin: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                  child: RaisedButton(
+                    onPressed: () => obtenerImagen('Galeria'),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[                        
+                        Icon(Icons.photo_library)
+                      ],
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20)
+                    ),
+                    textColor: Colors.white,
+                    color: Colors.green[300],
+                    padding: EdgeInsets.fromLTRB(12, 12, 12, 12),
+                  )
+                ),
+              ),
+              FadeInRight(
+                child: Container(
+                  margin: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                  child: RaisedButton(
+                    onPressed: () => clasificarImagen(),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[                        
+                        Icon(Icons.search)
+                      ],
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20)
+                    ),
+                    textColor: Colors.white,
+                    color: Colors.green[300],
+                    padding: EdgeInsets.fromLTRB(12, 12, 12, 12),
+                  )
+                ),
+              ),
+              ],
+            ),
+            SizedBox(height: 20,),
+            Padding(
+              padding: EdgeInsets.only(left: 15, top: 20),
+              child: Text(
+                'RECETAS SIMILARES',
+                style:  TextStyle(
+                  color: Colors.blueGrey,
+                  fontWeight: FontWeight.w500,
+                  fontSize: 15.0
+                ),
+              ),
+            ),
+            SizedBox(height: 20,),
+            BlocProvider(
+              create : (context) => RecetaBloc(recetaProvider: RecetasProvider()),
+              child: RecetaPage(),
+            ),
+
+            
+         ],
+       )
+    );
+  }
+       
+       /*
+       Container(
          padding: EdgeInsets.symmetric(horizontal: 20.0),
          child: Column(
            crossAxisAlignment: CrossAxisAlignment.start,
@@ -190,12 +290,13 @@ class _ComidaPageState extends State<ComidaPage> {
                 color: Colors.black54,
               ),  
             ),
-            
-           ],
-         ),
-       ),
-    );
-  }
+            /*
+            BlocProvider(
+            create : (context) => RecetaBloc(recetaProvider: RecetasProvider()),
+            child: RecetaPage(),
+          ),*/
+
+*/                                                  
 
 
   String getResult(){
