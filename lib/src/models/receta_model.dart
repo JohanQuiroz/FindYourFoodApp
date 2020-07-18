@@ -1,37 +1,28 @@
 
 
-class Recetas {
-  List<Receta> items = new List();
-
-  Recetas();
-
-  Recetas.fromJsonList (List<dynamic> jsonList) {
-    if ( jsonList == null) return;
-
-    for ( var item in jsonList ){
-      final receta = new Receta.fromJsonMap(item);
-      items.add( receta );
-    }
-
-  }
-}
-
-
 class Receta {
   String uri;
   String label;
   String image;
   String source;
   String url;
-  int yieldd;
+  String shareAs;
+  double yieldd;
   double calories;
   double totalWeight;
-  List<dynamic> ingredients;
+  double totalTime;
+  bool bookmarked;
+  bool bought;
+  /*
   List<dynamic> totalNutrients;
   List<dynamic> totalDaily;
   List<dynamic> dietLabels;
   List<dynamic> healthLabels;
-
+  List<dynamic> cautions;
+  List<dynamic> ingredientLines;
+  List<dynamic> ingredients;
+  List<dynamic> digest;
+*/
 
 
   Receta({
@@ -40,14 +31,21 @@ class Receta {
     this.image,
     this.source,
     this.url,
+    this.shareAs,
     this.yieldd,
     this.calories,
     this.totalWeight,
-    this.ingredients,
+    this.totalTime,
+    this.bookmarked,
+    this.bought,/*
     this.totalNutrients,
     this.totalDaily,
     this.dietLabels,
-    this.healthLabels
+    this.healthLabels,
+    this.ingredients,
+    this.cautions,
+    this.ingredientLines,
+    this.digest,*/
   });
 
 
@@ -58,14 +56,21 @@ class Receta {
     image             = json['image'];
     source            = json['source'];
     url               = json['url'];
+    shareAs           = json['shareAs'];
     yieldd            = json['yield'];
     calories          = json['calories'];
     totalWeight       = json['totalWeight'];
-    ingredients       = json['ingredients'];
+    totalTime         = json['totalTime'];
+    bookmarked        = json['bookmarked'];
+    bought            = json['bought'];/*
     totalNutrients    = json['totalNutrients'];
     totalDaily        = json['totalDaily'];
     dietLabels        = json['dietLabels'];
     healthLabels      = json['healthLabels'];
+    ingredients       = json['ingredients'];
+    cautions          = json['cautions'];
+    ingredientLines   = json['ingredientLines'];
+    digest            = json['digest'];*/
   }
 
 

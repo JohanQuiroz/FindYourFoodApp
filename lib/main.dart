@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fyf/src/screens/home_page.dart';
+import 'package:fyf/src/screens/comida_page.dart';
 import 'package:fyf/src/screens/start_page.dart';
 
 void main() {
@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/' : ( BuildContext context ) => StartPage(),
-        '/home' : ( BuildContext context ) => HomePage(),
+        '/comida' : ( BuildContext context ) => ComidaPage(),
       },     
     );
   }

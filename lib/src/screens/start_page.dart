@@ -14,7 +14,7 @@ class StartPage extends StatelessWidget {
           child: Center(
             child: GestureDetector(
               onTap: (){
-                Navigator.pushReplacementNamed(context, '/home');
+                Navigator.pushReplacementNamed(context, '/comida');
               },              
               child: Container(
                 width: 10,

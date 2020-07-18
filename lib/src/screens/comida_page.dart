@@ -5,7 +5,6 @@ import 'dart:ui';
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:fyf/src/providers/recetas_provider.dart';
-import 'package:fyf/src/screens/recetas_pages.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tflite/tflite.dart';
 
@@ -75,7 +74,8 @@ class _ComidaPageState extends State<ComidaPage> {
     setState(() {
       _resultado = salida[0]['label'].toString().substring(2); 
       
-      final recetas = recetasProvider.getRecetas(_resultado);
+      //final recetas = recetasProvider.getRecetas(_resultado);
+      
       //MaterialPageRoute(builder: (BuildContext context) => RecetasPage(busqueda: _resultado ));
     });
   }
