@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fyf/src/blocs/recetaBloc/bloc.dart';
-import '../../models/receta_response.dart';
-import '../../providers/recetas_provider.dart';
+import '../../models/recetaResponse.dart';
+import '../../providers/recetasProvider.dart';
 
 
 
@@ -22,7 +22,7 @@ class RecetaBloc extends Bloc<RecetaEvent, RecetaState>
     if(event is FetchRecetaEvent){
       yield RecetaLoadingState();
       try{
-        RecetaResponse recetas =  await recetaProvider.getRecetas('chicken');
+        RecetaResponse recetas =  await recetaProvider.getRecetas(event.comida);
         yield RecetaLoadedState(recetas: recetas);
       }
       catch(e){

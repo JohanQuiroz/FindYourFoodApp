@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fyf/src/blocs/recetaBloc/bloc.dart';
+import 'package:fyf/src/models/recetaModel.dart';
+import 'package:fyf/src/screens/recetaDetalle.dart';
 
-import '../models/receta_response.dart';
-import '../models/receta_response.dart';
-import '../models/receta_response.dart';
+import '../models/recetaResponse.dart';
 
 class RecetaPage extends StatefulWidget {
+  String comida;
+  RecetaPage({@required this.comida});
   @override
   _RecetaPageState createState() => _RecetaPageState();
 }
-
 class _RecetaPageState extends State<RecetaPage> {
 
   RecetaBloc recetaBloc;
@@ -20,7 +21,7 @@ class _RecetaPageState extends State<RecetaPage> {
   void initState() {    
     super.initState();
     recetaBloc = BlocProvider.of<RecetaBloc>(context);
-    recetaBloc.add(FetchRecetaEvent());
+    recetaBloc.add(FetchRecetaEvent(comida : widget.comida));
   }
 
   @override
@@ -39,9 +40,11 @@ class _RecetaPageState extends State<RecetaPage> {
             return _renderLoading();
           else if(state is RecetaLoadingState)
             return _renderLoading();     
-          else if (state is RecetaLoadedState){
+          else if (state is RecetaLoadedState)
             return _renderRecetas(state.recetas, context);
-          }           
+          else 
+            return Container(width: 0.0, height: 0.0);                 
+                    
         },
       ),
     );
@@ -62,18 +65,42 @@ class _RecetaPageState extends State<RecetaPage> {
                 maxHeight: 278.0,
                 maxWidth: MediaQuery.of(context).size.width * 0.40,
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisSize: MainAxisSize.max,
-                children: <Widget>[
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(20),
-                    child: Image.network(results[index].receta.image),
-                  ),
-                  SizedBox(height: 10,),
-                  Text(results[index].receta.label)
-                ],  
-              )          
+              child: GestureDetector(
+                onTap: (){
+                  Navigator.push(context, MaterialPageRoute(
+                    builder: (context) =>  RecetaDetalle(receta: results[index].receta),                    
+                 ));                  
+                },
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.max,
+                  children: <Widget>[
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(20),
+                      child: Image.network(results[index].receta.image),
+                    ),
+                    SizedBox(height: 10,),
+                    Text(results[index].receta.label),     
+                    Divider(color: Colors.amber,),               
+                    RichText(
+                      text: TextSpan(
+                        text: results[index].receta.ingredientLines.length.toString(),
+                        style: TextStyle(
+                          color: Colors.green
+                        ),
+                        children: [
+                          TextSpan(
+                            text: ' INGREDIENTS',
+                            style: TextStyle(
+                              color: Colors.blueGrey
+                            ),
+                          )
+                        ]
+                      ),                      
+                    ),                                     
+                  ],  
+                ),
+              ),                            
             ),
             SizedBox(width: 20,),
           ],

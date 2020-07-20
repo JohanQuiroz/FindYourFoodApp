@@ -6,12 +6,12 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fyf/src/blocs/recetaBloc/bloc.dart';
-import 'package:fyf/src/providers/recetas_provider.dart';
+import 'package:fyf/src/providers/recetasProvider.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tflite/tflite.dart';
 
-import '../providers/recetas_provider.dart';
-import 'receta_page.dart';
+import '../providers/recetasProvider.dart';
+import 'recetaPage.dart';
 
 
 class ComidaPage extends StatefulWidget {
@@ -176,7 +176,7 @@ class _ComidaPageState extends State<ComidaPage> {
             Padding(
               padding: EdgeInsets.only(left: 15, top: 20),
               child: Text(
-                'RECETAS SIMILARES',
+                'SIMILAR RECIPES',
                 style:  TextStyle(
                   color: Colors.blueGrey,
                   fontWeight: FontWeight.w500,
@@ -187,7 +187,7 @@ class _ComidaPageState extends State<ComidaPage> {
             SizedBox(height: 20,),
             BlocProvider(
               create : (context) => RecetaBloc(recetaProvider: RecetasProvider()),
-              child: RecetaPage(),
+              child: RecetaPage(comida : 'Pollo'),
             ),
 
             

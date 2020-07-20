@@ -1,5 +1,5 @@
 
-import 'package:fyf/src/models/receta_model.dart';
+import 'package:fyf/src/models/recetaModel.dart';
 
 class RecetaResponse {
     RecetaResponse({

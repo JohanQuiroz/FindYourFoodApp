@@ -1,12 +1,9 @@
 import 'dart:async';
 import 'dart:convert';
-
-import 'package:fyf/src/models/receta_model.dart';
-import 'package:fyf/src/models/receta_response.dart';
+import 'package:fyf/src/models/recetaResponse.dart';
 import 'package:http/http.dart' as http;
 
-import '../models/receta_response.dart';
-import '../models/receta_response.dart';
+import '../models/recetaResponse.dart';
 
 
 
@@ -23,7 +20,7 @@ class RecetasProvider {
       'app_key' : _apikey
     });*/
 
-    final url = "https://${_url}/search?q=chicken&app_id=${_appId}&app_key=${_apikey}";
+    final url = "https://$_url/search?q=$comida&app_id=$_appId&app_key=$_apikey";
     print (url);
     final response = await http.get(url);
     if(response.statusCode == 200){
