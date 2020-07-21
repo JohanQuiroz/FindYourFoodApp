@@ -31,6 +31,7 @@ class _ComidaPageState extends State<ComidaPage> {
   File _imagen;
   String _resultado;
   String _ruta;    
+  bool buscar = false;
   
 /*
   @override
@@ -75,10 +76,7 @@ class _ComidaPageState extends State<ComidaPage> {
 
     setState(() {
       _resultado = salida[0]['label'].toString().substring(2); 
-      
-      //final recetas = recetasProvider.getRecetas(_resultado);
-      
-      //MaterialPageRoute(builder: (BuildContext context) => RecetasPage(busqueda: _resultado ));
+      buscar = true;
     });
   }
 
@@ -172,6 +170,18 @@ class _ComidaPageState extends State<ComidaPage> {
               ),
               ],
             ),
+            SizedBox(height: 15,),
+            Container(
+              child: _resultado == null
+                ? Text("")
+                : Text(
+                  _resultado,
+                  style: TextStyle(
+                    fontSize: 35,     
+                    foreground: Paint()..shader = linearGradient,
+                  ),     
+                )
+            ),
             SizedBox(height: 20,),
             Padding(
               padding: EdgeInsets.only(left: 15, top: 20),
@@ -185,14 +195,20 @@ class _ComidaPageState extends State<ComidaPage> {
               ),
             ),
             SizedBox(height: 20,),
-            BlocProvider(
-              create : (context) => RecetaBloc(recetaProvider: RecetasProvider()),
-              child: RecetaPage(comida : 'Pollo'),
-            ),
+            if(_resultado != null && buscar) 
+              _mostrarRecetas(_resultado)
 
             
          ],
        )
+    );
+  }
+
+  Widget _mostrarRecetas (comida){
+    buscar = false;
+    return BlocProvider(
+      create : (context) => RecetaBloc(recetaProvider: RecetasProvider()),
+      child: RecetaPage(comida : comida),
     );
   }
        
